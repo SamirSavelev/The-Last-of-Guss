@@ -17,10 +17,10 @@ export const RoundPage = () => {
   if (!roundId) {
     return null;
   }
-  let headerTitle = 'Раунды';
+  let headerTitle = `Раунд!`;
 
   if (phase === 'cooldown') {
-    headerTitle = 'Cooldown';
+    headerTitle = 'Приготовьтесь!';
   } else if (phase === 'finished') {
     headerTitle = 'Раунд завершен';
   }

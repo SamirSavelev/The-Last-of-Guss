@@ -94,7 +94,7 @@ export const RoundDetails: FC<RoundDetailsProps> = ({ roundId }) => {
 
         {phase === 'cooldown' && (
           <>
-            <Text className="round-details__line">Cooldown</Text>
+            <Text className="round-details__line">Приготовьтесь!</Text>
             <Text className="round-details__line">
               до начала раунда {timeText}
             </Text>
