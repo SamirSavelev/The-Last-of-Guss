@@ -1,3 +1,5 @@
+import '@shared/lib/mobx/configureMobx';
+import { StoreProvider } from '@app/providers/StoreProvider';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ConfigProvider } from 'antd';
@@ -9,7 +11,9 @@ import '@app/styles';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ConfigProvider theme={themeConfig}>
-      <AppRouter />
+      <StoreProvider>
+        <AppRouter />
+      </StoreProvider>
     </ConfigProvider>
   </StrictMode>
 );
