@@ -1,4 +1,5 @@
-export type RoundStatusFilter = 'active' | 'cooldown' | 'finished';
+export type RoundStatus = 'active' | 'cooldown' | 'finished';
+export type RoundStatusFilter = RoundStatus;
 
 export interface Round {
   id: string;
@@ -6,6 +7,7 @@ export interface Round {
   endTime: string;
   totalScore: number;
   createdAt: string;
+  status?: RoundStatus;
 }
 
 export interface RoundsListPagination {

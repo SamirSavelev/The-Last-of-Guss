@@ -1,0 +1,25 @@
+.create-round-button {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &.ant-btn {
+    border-radius: 999px;
+    border-color: var(--color-blood);
+    background: radial-gradient(circle at top, var(--color-blood-soft), #000);
+    color: var(--color-text-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  }
+
+  &.ant-btn:hover,
+  &.ant-btn:focus {
+    border-color: var(--color-accent);
+    background: radial-gradient(circle at top, var(--color-blood), #000);
+    color: var(--color-text-primary);
+  }
+
+  &.ant-btn[disabled] {
+    opacity: 0.6;
+    box-shadow: none;
+  }
+}

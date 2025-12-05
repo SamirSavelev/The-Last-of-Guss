@@ -1,3 +1,38 @@
+import { useParams } from 'react-router-dom';
+
+import { useRoundDetailsQuery } from '@shared/api/hooks/useRounds';
+import { RoundDetails, useRoundTimer } from '@features/rounds/round-details';
+
+import { Header } from '@widgets';
+
+import './RoundPage.scss';
+
 export const RoundPage = () => {
-  return <div>Round Page</div>;
+  const { roundId } = useParams<{ roundId: string }>();
+
+  const { data } = useRoundDetailsQuery(roundId || '');
+  const round = data?.round;
+  const { phase } = useRoundTimer(round);
+
+  if (!roundId) {
+    return null;
+  }
+  let headerTitle = 'Раунды';
+
+  if (phase === 'cooldown') {
+    headerTitle = 'Cooldown';
+  } else if (phase === 'finished') {
+    headerTitle = 'Раунд завершен';
+  }
+
+  return (
+    <main className="round-page">
+      <section className="round-page__inner">
+        <Header title={headerTitle} />
+        <div className="round-page__content">
+          <RoundDetails roundId={roundId} />
+        </div>
+      </section>
+    </main>
+  );
 };

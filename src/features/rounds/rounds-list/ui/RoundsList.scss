@@ -1,0 +1,95 @@
+.rounds-list {
+  &__center {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  &__alert {
+    margin-top: 16px;
+    background-color: var(--color-bg-surface);
+    border-color: var(--color-border-subtle);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+
+    .anticon-close-circle {
+      color: var(--color-blood);
+    }
+  }
+
+  &__empty {
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+  }
+
+  &__item {
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 16px;
+  }
+
+  &__card {
+    width: 100%;
+    background: radial-gradient(
+        circle at top,
+        rgba(176, 196, 222, 0.06) 0,
+        transparent 60%
+      ),
+      var(--color-bg-surface);
+    border-radius: 14px;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+    padding: 16px 18px 14px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  &__bullet {
+    font-size: 12px;
+    color: var(--color-blood);
+  }
+
+  &__round-id-link {
+    text-decoration: none;
+    color: var(--color-accent);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__times {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+
+    span {
+      color: var(--color-text-muted);
+      font-size: 13px;
+    }
+  }
+
+  &__divider {
+    border-top: 1px solid var(--color-border-subtle);
+    margin: 8px 0 10px;
+  }
+
+  &__status {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+}
+
+/* лёгкий акцент на спиннере */
+.rounds-list__center .ant-spin-dot-item {
+  background-color: var(--color-blood-soft);
+}

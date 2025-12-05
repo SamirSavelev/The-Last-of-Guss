@@ -1,75 +1,87 @@
-# React + TypeScript + Vite
+<p align="center">
+  <img src="./.github/preview.png" alt="The Last of Guss — мутировавший гусь" width="720" />
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">The Last of Guss</h1>
 
-Currently, two official plugins are available:
+<p align="center">
+  Мрачная веб-игра на реакцию: натапай по мутировавшему гусю G-42 быстрее других игроков.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🧬 Описание
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+**The Last of Guss** — браузерная мини-игра, где игроки соревнуются в раундах:
+кто больше раз успеет кликнуть по мутировавшему гусю за ограниченное время.
 
-Note: This will impact Vite dev & build performances.
+Приложение состоит из трёх основных экранов:
 
-## Expanding the ESLint configuration
+1. **Авторизация**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   - Вход по имени и паролю.
+   - При первом логине пользователь автоматически создаётся.
+   - Если пользователь уже существует и пароль не совпадает — показывается ошибка.
+   - Тестовый админ-пользователь:
+     - `username: admin`
+     - `password: pass`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Список раундов**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   - Отображение активных и запланированных раундов.
+   - Для каждого раунда:
+     - `Round ID` (ссылка на страницу раунда),
+     - время начала и конца,
+     - статус: `Активен`, `Cooldown`, `Завершен`.
+   - Кнопка **«Создать раунд»** доступна только администратору; после создания он сразу попадает на страницу нового раунда.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. **Страница раунда**
+   - Большой мутировавший гусь, по которому можно тапать, если раунд активен.
+   - Состояние раунда:
+     - `Активен` — таймер до конца раунда, счёт пользователя.
+     - `Cooldown` — таймер до старта.
+     - `Завершен` — итоговая статистика, победитель и мой счёт.
+   - При клике по гусю — короткая анимация «удара» в хоррор-стилистике.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Стек и архитектура
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Frontend**
+
+  - React + TypeScript + Vite
+  - React Router
+  - Ant Design (UI-компоненты)
+  - MobX (стор пользователя и состояние игры)
+  - @tanstack/react-query (работа с API, кеширование)
+  - moment.js (работа с датами и таймерами)
+  - SCSS + БЭМ (кастомные стили, тёмная хоррор-тема)
+
+- **Архитектура**
+  - Feature-Sliced Design:
+    - `app/` — провайдеры, роутинг, StoreProvider
+    - `pages/` — страницы (`LoginPage`, `RoundsPage`, `RoundPage`)
+    - `widgets/` — крупные виджеты (`PageHeader`, `Header`)
+    - `features/` — функциональные фичи (авторизация, список раундов, гусь, создание раунда и т.д.)
+    - `shared/` — API-слой, UI, сторы, утилиты, стили
+
+---
+
+## 🚀 Запуск проекта
+
+```bash
+# Установка зависимостей
+npm install
+
+# Локальный режим разработки
+npm run dev
+
+# Линт
+npm run lint
+
+# Production-сборка
+npm run build
+
+# Превью production-сборки
+npm run preview
 ```
